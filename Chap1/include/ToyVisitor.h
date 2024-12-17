@@ -1,6 +1,9 @@
 #include "clang/AST/Decl.h"
 #include "clang/AST/DeclVisitor.h"
+#include "clang/AST/RecursiveASTVisitor.h"
 #include "llvm/Support/raw_ostream.h"
+
+namespace declv {
 
 class ToyVisitor : public clang::DeclVisitor<ToyVisitor> {
 public:
@@ -21,3 +24,22 @@ public:
     }
   }
 };
+
+} // namespace declv
+
+namespace recursivev {
+
+class ToyVisitor: public clang::RecursiveASTVisitor<ToyVisitor> {
+public:
+  bool VisitFunctionDecl(const clang::FunctionDecl *FD) {
+    llvm::outs() << "Function: " << FD->getName() << "\n";
+    return true;
+  }
+
+  bool VisitParmVarDecl(const clang::ParmVarDecl *PVD) {
+    llvm::outs() << "  -> Paramname: " << PVD->getName() << "\n";
+    return true;
+  }
+}; 
+
+} // namespace recursivev
