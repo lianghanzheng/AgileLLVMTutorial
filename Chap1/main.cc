@@ -1,3 +1,5 @@
+#include "ToyFrontendAction.h"
+
 #include "clang/Frontend/FrontendActions.h"
 #include "clang/Tooling/Tooling.h"
 #include "clang/Tooling/CommonOptionsParser.h"
@@ -21,5 +23,6 @@ int main(int argc, const char **argv) {
         expectedParser->getCompilations(),
         expectedParser->getSourcePathList());
 
-  return tool.run(clang::tooling::newFrontendActionFactory<clang::SyntaxOnlyAction>().get());
+  return tool.run(clang::tooling::newFrontendActionFactory<
+      ToyFrontendAction>().get());
 }
