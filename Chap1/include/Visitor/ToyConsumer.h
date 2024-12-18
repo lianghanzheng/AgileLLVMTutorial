@@ -1,3 +1,5 @@
+#pragma once
+
 #include "ToyVisitor.h"
 
 #include "clang/AST/ASTConsumer.h"

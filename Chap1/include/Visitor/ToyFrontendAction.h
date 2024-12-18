@@ -1,3 +1,5 @@
+#pragma once
+
 #include "ToyConsumer.h"
 #include "clang/AST/ASTConsumer.h"
 #include "clang/Frontend/FrontendAction.h"
