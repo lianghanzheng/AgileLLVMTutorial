@@ -18,9 +18,31 @@ LLVM是一个极为复杂、但是无论在科研还是在业界都有重要的�
 
 本教程计划包含的主题有：
 
-* [] **Chapter 0**：从一个带变量的计算器前端开始，探索LLVM模块的生成以及在后续流程中对工具链的调用
-* [] **Chapter 1**：基于LibTooling、ASTMatcher和ASTConsumer改变clang前端的行为
-* [] **Chapter 2**：pass的编写、不同的调用方式、基于pass plugin的扩展
-* [] **Chapter 3**：调试这些项目
-* [] **Chapter 4**：MLIR的使用概览
-* [] **Chatper 5**：后端相关
+* [] **Chapter 0**：提供LLVM的预览
+* [] **Chapter 1**：基于LibTooling编写工具，并利用FrontendAction改变clang前端的行为
+* [] **Chapter 2**：基于clang plugin编写的前端工具，初步集成 `llvm-lit` 测试
+* [] **Chapter ?**：pass的编写、不同的调用方式、基于pass plugin的扩展
+* [] **Chapter ?**：调试这些项目
+* [] **Chapter ?**：MLIR的使用概览
+* [] **Chatper ?**：后端相关
+
+## Prerequisite
+
+* 对CMake有基本了解：本教程涉及的代码会尽力以out-of-tree的形式编写，因此CMake文件相对轻量级
+* 了解并掌握递归下降程序的编写：本教程不涉及前端，因此不会在这个方面浪费笔墨
+
+## LLVM编译命令
+
+```sh
+mkdir build && cd build
+
+cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DLLVM_BUILD_LLVM_DYLIB=ON \
+-DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_OPTIMIZED_TABLEGEN=ON -DLLVM_TARGETS_TO_BUILD="ARM;AArch64" \
+-DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;mlir;openmp;polly" -DLLVM_BUILD_TOOLS=ON \
+-DLLVM_ENABLE_EH=ON -DLLVM_ENABLE_RTTI=ON \
+-DLLVM_PARALLEL_LINK_JOBS=16 -DCMAKE_INSTALL_PREFIX=/opt/llvm17 -DLLVM_ENABLE_DOXYGEN=OFF \
+-DLLVM_ENABLE_SPHINX=OFF -DLLVM_ENABLE_LLD=OFF -DLLVM_ENABLE_BINDINGS=OFF -DLLVM_ENABLE_LIBXML2=OFF \
+-DOPENMP_ENABLE_LIBOMPTARGET=OFF -DLLVM_STATIC_LINK_CXX_STDLIB=ON ../llvm
+```
+
+所有示例代码在17.0.6和20.0.0上均编译通过，未来可能额外验证支持一个CIR正式发布的LLVM版本。
