@@ -21,7 +21,7 @@ static llvm::cl::extrahelp CommonHelp(
 
 static llvm::cl::opt<std::string> UseDeclOrRecursive {
     "visitor-type", llvm::cl::init("decl"),
-    llvm::cl::desc {"the argument should be either 'decl' or 'recursive' to choose the visitor"}};
+    llvm::cl::desc {"the argument should be either 'decl', 'recurs', or 'matcher' to choose the visitor"}};
 
 int main(int argc, const char **argv) {
   auto expectedParser = clang::tooling::CommonOptionsParser::create(argc, argv, toolCategory);
